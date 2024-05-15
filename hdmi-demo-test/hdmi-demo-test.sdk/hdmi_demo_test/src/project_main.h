@@ -50,17 +50,37 @@
 #define FRAME_ARRAY_SIZE GAME_STRIDE*GAME_RES_HEIGHT
 
 //Lanes for the game each  is 72 pixels wide
-#define PLAYER_Y_COORD GAME_RES_HEIGHT-72
+#define PLAYER_Y_COORD 	GAME_RES_HEIGHT-72
+#define SCORE_Y_COORD 	0 //I want score alligned at top of screen
 
-#define ROW1_COORD ((GAME_RES_WIDTH-360)/2)
-#define ROW2_COORD (ROW1_COORD + 72)
-#define ROW3_COORD (ROW2_COORD + 72)
-#define ROW4_COORD (ROW3_COORD + 72)
-#define ROW5_COORD (ROW4_COORD + 72)
-#define ROW5_END_COORD (ROW5_COORD + 72)
 
+#define COL1_COORD ((GAME_RES_WIDTH-360)/2)
+#define COL2_COORD (COL1_COORD + 72)
+#define COL3_COORD (COL2_COORD + 72)
+#define COL4_COORD (COL3_COORD + 72)
+#define COL5_COORD (COL4_COORD + 72)
+#define COL5_END_COORD (COL5_COORD + 72)
+
+#define ROW0_Y_COORD 	0
+#define ROW1_Y_COORD 	ROW0_Y_COORD+72
+#define ROW2_Y_COORD	ROW1_Y_COORD+72
+#define ROW3_Y_COORD	ROW2_Y_COORD+72
+#define ROW4_Y_COORD	ROW3_Y_COORD+72
+#define ROW5_Y_COORD	ROW4_Y_COORD+72
+#define ROW6_Y_COORD	ROW5_Y_COORD+72
+#define ROW7_Y_COORD	ROW6_Y_COORD+72
+#define ROW8_Y_COORD	ROW7_Y_COORD+72
+#define ROW9_Y_COORD	ROW8_Y_COORD+72
+#define ROW10_Y_COORD	ROW9_Y_COORD+72
+#define ROW11_Y_COORD	ROW10_Y_COORD+72
+#define ROW12_Y_COORD	ROW11_Y_COORD+72
+#define ROW13_Y_COORD	ROW12_Y_COORD+72
+#define ROW14_Y_COORD	ROW13_Y_COORD+72
 
 void HardwareInitialize();
 void GameRun();
+
+extern void movePlayerLeft();
+extern void movePlayerRight();
 
 #endif /* SRC_PROJECT_MAIN_H_ */

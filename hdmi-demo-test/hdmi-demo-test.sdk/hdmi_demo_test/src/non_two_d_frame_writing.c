@@ -284,12 +284,73 @@ void clearPlayer(u32 x, u32 y, u8* frame, u32 stride){
 	}
 }
 
+void writeEnemy(u32 x, u32 y, u8* frame, u32 stride){
+	u32 max_x = x+72;//72 is how wide characters are
+	u32 max_y = y+72;//72 is how tall characters are
+	int i;
+	for(i = x; i < max_x; i++){
+		int j;
+		for (j = y; j < max_y; j++){
+			frame[i*3+j*stride] = 0;
+			frame[i*3+j*stride + 1] = 255;
+			frame[i*3+j*stride + 2] = 0;
+		}
+	}
+}
+
+void writeScore(u32 x, u32 y, int score, u8* frame, u32 stride){
+	char val[49];//screen can fit 48 characters the way I am laying it out so we just add one for null terminator
+	itoa(score, val, 10);//10 means base ten so it will be a decimal number
+	int i = 0;
+	while(val[i] != '\0'){
+		switch(val[i]){
+			case '0':
+				writeWhiteZero(x+i*40, y, frame, stride);
+				break;
+			case '1':
+				writeWhiteOne(x+i*40, y, frame, stride);
+				break;
+			case '2':
+				writeWhiteTwo(x+i*40, y, frame, stride);
+				break;
+			case '3':
+				writeWhiteThree(x+i*40, y, frame, stride);
+				break;
+			case '4':
+				writeWhiteFour(x+i*40, y, frame, stride);
+				break;
+			case '5':
+				writeWhiteFive(x+i*40, y, frame, stride);
+				break;
+			case '6':
+				writeWhiteSix(x+i*40, y, frame, stride);
+				break;
+			case '7':
+				writeWhiteSeven(x+i*40, y, frame, stride);
+				break;
+			case '8':
+				writeWhiteEight(x+i*40, y, frame, stride);
+				break;
+			case '9':
+				writeWhiteNine(x+i*40, y, frame, stride);
+				break;
+
+		}
+		i++;
+	}
+}
+
 void writeGameScreen(u8 * frame, u32 stride){
 	int i;
 	for(i = 0; i < GAME_RES_WIDTH; i++){//1280 is screen width
 		int j;
 		for (j = 0; j < GAME_RES_HEIGHT; j++){//720 is screen height
-			if(i < ROW1_COORD || i > ROW5_END_COORD){
+			if(i < COL1_COORD || i > COL5_END_COORD){
+				frame[i*3+j*stride] = 0;
+				frame[i*3+j*stride + 1] = 0;
+				frame[i*3+j*stride + 2] = 0;
+			}else
+			if(j < 72){//72 is height of a character so I want to make sure the top of the screen is reserved for score
 				frame[i*3+j*stride] = 0;
 				frame[i*3+j*stride + 1] = 0;
 				frame[i*3+j*stride + 2] = 0;

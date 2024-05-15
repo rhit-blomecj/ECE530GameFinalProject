@@ -11,6 +11,7 @@
 
 #include "xil_types.h"
 #include "project_main.h"
+//#include ""
 
 //typedef struct rgb_val{
 //	u8 red;
@@ -38,9 +39,13 @@ extern void writeWhiteEight(u32 x, u32 y, u8 * frame, u32 stride);
 
 extern void writeWhiteNine(u32 x, u32 y, u8 * frame, u32 stride);
 
+extern void writeScore(u32 x, u32 y, int score, u8* frame, u32 stride);
+
 extern void writePlayer(u32 x, u32 y, u8 * frame, u32 stride);
 
 extern void clearPlayer(u32 x, u32 y, u8 * frame, u32 stride);
+
+extern void writeEnemy(u32 x, u32 y, u8* frame, u32 stride);
 
 extern void writeGameScreen(u8 * frame, u32 stride);
 

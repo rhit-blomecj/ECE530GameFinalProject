@@ -10,7 +10,10 @@ DisplayCtrl dispCtrl;
 XAxiVdma vdma;
 INTC intc;
 char fRefresh; //flag used to trigger a refresh of the Menu on video detect
-int playerPos = ROW3_COORD;
+int playerPos = COL3_COORD;
+int score = 0;
+int enemyArray[15];
+
 /*
  * Framebuffers for video data
  */
@@ -108,7 +111,8 @@ void GameRun()
 	char userInput = 0;
 
 	writeGameScreen(pFrames[dispCtrl.curFrame], GAME_STRIDE);
-	writePlayer(ROW3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writePlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 
 	/* Flush UART FIFO */
@@ -142,35 +146,17 @@ void GameRun()
 
 		switch (userInput)
 		{
-		case '1':
-			writeWhiteOne(40, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		case 'x':
+			updateEnemyPositions();
+			spawnEnemy();
 			break;
-		case '2':
-			writeWhiteTwo(80, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		case '+':
+			score += 100;
+			writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case '3':
-			writeWhiteThree(120, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '4':
-			writeWhiteFour(160, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '5':
-			writeWhiteFive(200, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '6':
-			writeWhiteSix(240, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '7':
-			writeWhiteSeven(280, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '8':
-			writeWhiteEight(320, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '9':
-			writeWhiteNine(360, 0, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-			break;
-		case '0':
-			writeWhiteZero(0,0,pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		case '-':
+			score -= 100;
+			writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
 		case ',':
 			movePlayerLeft(pFrames[dispCtrl.curFrame], GAME_STRIDE);
@@ -191,57 +177,111 @@ void GameRun()
 	return;
 }
 
-void movePlayerLeft(u8* frame, u32 stride){
+void movePlayerLeft(){
 	switch(playerPos){
-		case ROW1_COORD:
-			playerPos = ROW1_COORD;
-			clearPlayer(ROW1_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL1_COORD:
+			playerPos = COL1_COORD;
+			clearPlayer(COL1_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW2_COORD:
-			playerPos = ROW1_COORD;
-			clearPlayer(ROW2_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL2_COORD:
+			playerPos = COL1_COORD;
+			clearPlayer(COL2_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW3_COORD:
-			playerPos = ROW2_COORD;
-			clearPlayer(ROW3_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL3_COORD:
+			playerPos = COL2_COORD;
+			clearPlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW4_COORD:
-			playerPos = ROW3_COORD;
-			clearPlayer(ROW4_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL4_COORD:
+			playerPos = COL3_COORD;
+			clearPlayer(COL4_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW5_COORD:
-			playerPos = ROW4_COORD;
-			clearPlayer(ROW5_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL5_COORD:
+			playerPos = COL4_COORD;
+			clearPlayer(COL5_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
 	}
-	writePlayer(playerPos, PLAYER_Y_COORD, frame, stride);
+	writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 }
 
-void movePlayerRight(u8* frame, u32 stride){
+void movePlayerRight(){
 	switch(playerPos){
-		case ROW1_COORD:
-			playerPos = ROW2_COORD;
-			clearPlayer(ROW1_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL1_COORD:
+			playerPos = COL2_COORD;
+			clearPlayer(COL1_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW2_COORD:
-			playerPos = ROW3_COORD;
-			clearPlayer(ROW2_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL2_COORD:
+			playerPos = COL3_COORD;
+			clearPlayer(COL2_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW3_COORD:
-			playerPos = ROW4_COORD;
-			clearPlayer(ROW3_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL3_COORD:
+			playerPos = COL4_COORD;
+			clearPlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW4_COORD:
-			playerPos = ROW5_COORD;
-			clearPlayer(ROW4_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL4_COORD:
+			playerPos = COL5_COORD;
+			clearPlayer(COL4_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
-		case ROW5_COORD:
-			playerPos = ROW5_COORD;
-			clearPlayer(ROW5_COORD, PLAYER_Y_COORD, frame, stride);
+		case COL5_COORD:
+			playerPos = COL5_COORD;
+			clearPlayer(COL5_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 			break;
 	}
 
-	writePlayer(playerPos, PLAYER_Y_COORD, frame, stride);
+	writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 }
+
+void spawnEnemy(){
+	int r = (rand()%5)+1; //this should give me a number between 1 and 5
+
+	switch(r){
+		case 1:
+			enemyArray[1] = COL1_COORD;
+			writeEnemy(COL1_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 2:
+			enemyArray[1] = COL2_COORD;
+			writeEnemy(COL2_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 3:
+			enemyArray[1] = COL3_COORD;
+			writeEnemy(COL3_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 4:
+			enemyArray[1] = COL4_COORD;
+			writeEnemy(COL4_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 5:
+			enemyArray[1] = COL5_COORD;
+			writeEnemy(COL5_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+	}
+
+}
+
+void updateEnemyPosition(int enemy){
+
+}
+
+void updateEnemyPositions(){
+	int i = 0;
+	int temp1 = 0;
+	int temp2 = 0;
+
+	for(i = 1; i < 15; i++){
+		temp1 = enemyArray[i];
+		clearPlayer(enemyArray[i], i*72, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		enemyArray[i] = temp2;
+		temp2 = temp1;
+	}
+
+	i=1;
+	while(i<15){
+		writeEnemy(enemyArray[i], (i)*72, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		i++;
+	}
+
+}
+
+

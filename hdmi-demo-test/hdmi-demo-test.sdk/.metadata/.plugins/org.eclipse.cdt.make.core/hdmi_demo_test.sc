@@ -29,6 +29,7 @@
 <includePath path="#undef __ARM_FEATURE_FP16_FML" removed="true"/>
 <includePath path="#undef __ARM_FEATURE_QRDMX" removed="true"/>
 <includePath path="c:\xilinx\sdk\2019.1\gnu\aarch32\nt\gcc-arm-none-eabi\bin\../arm-none-eabi/libc/usr/include"/>
+<includePath path="#undef __ARM_NEON__" removed="true"/>
 <includePath path="#undef __ARM_FEATURE_IDIV" removed="true"/>
 <includePath path="#undef __ARM_FEATURE_FMA" removed="true"/>
 <includePath path="#undef __ARM_ARCH_EXT_IDIV__" removed="true"/>
