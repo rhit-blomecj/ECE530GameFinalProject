@@ -1,0 +1,15 @@
+/*
+ * project_main.h
+ *
+ *  Created on: May 14, 2024
+ *      Author: blomecj
+ */
+
+#ifndef SRC_PROJECT_MAIN_H_
+#define SRC_PROJECT_MAIN_H_
+
+#define GAME_RES_WIDTH 	1280
+#define GAME_STRIDE 	3*(GAME_RES_WIDTH)
+
+
+#endif /* SRC_PROJECT_MAIN_H_ */
