@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;invader_moving/src/video_demo.h&apos; to &apos;hdmi_example_anim.h&apos;" description="Rename resource &apos;video_demo.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/video_demo.h" name="hdmi_example_anim.h" stamp="1715625055954" updateReferences="true"/>
+</session>

@@ -1,0 +1,398 @@
+#include "project_main.h"
+#include "xscutimer.h"
+#include "xscugic.h"
+#include "xil_exception.h"
+#include "xgpio.h"
+#include "xil_printf.h"
+#include "xtmrctr.h"
+/* ------------------------------------------------------------ */
+/*				Global Variables								*/
+/* ------------------------------------------------------------ */
+
+
+/*
+ * Display and Video Driver structs
+ */
+DisplayCtrl dispCtrl;
+XAxiVdma vdma;
+INTC intc;
+char fRefresh; //flag used to trigger a refresh of the Menu on video detect
+int playerPos = COL3_COORD;
+int score = 0;
+int enemyArray[15];
+
+//Timer load value:  Count up timer (0xFFFFFFFF - 0xF8000000)=0x7FFFFFF=134217727
+//134217727/50MHz = 134217727*20ns=1342177270ns = 2.684 (seconds)
+//#define TMR_LOAD			0xF8000000 for 100ms
+#define TMR_LOAD			0xFF000000
+int timer_load_value;
+
+XScuTimer TimerInstance;
+
+
+typedef enum {FALL, HIT} EnemyStatus;
+EnemyStatus Enemy1;
+EnemyStatus Enemy2;
+
+XGpio LEDInst, BTNInst, SWSInst;
+XScuGic GICinstance;
+XTmrCtr TMRInst;
+
+int timer_load_value;
+
+
+#define LEFT  0b1000
+#define RIGHT 0b0001
+
+/*
+ * Framebuffers for video data
+ */
+u8 frameBuf[DISPLAY_NUM_FRAMES][FRAME_ARRAY_SIZE] __attribute__((aligned(0x20)));
+u8 *pFrames[DISPLAY_NUM_FRAMES]; //array of pointers to the frame buffers
+
+
+
+// Function Prototypes
+
+static int SetupPushbuttons(XGpio *Pushbuttondevice, int DeviceID);
+static void BTN_Intr_Handler(void *baseaddr_p);
+static void TMR_Intr_Handler(void *baseaddr_p);
+static int GICconfiguration2(u16 DeviceId, XTmrCtr *TmrInstancePtr, XGpio *GpioInstancePtr, XGpio *SWSInstancePtr, XScuGic *GICinstancePtr);
+
+void BTN_Intr_Handler(void *InstancePtr)
+{
+	int btn_value; //local and temporary variables
+
+	XGpio_InterruptDisable(&BTNInst, BTN_INT_MASK);
+	// Ignore additional button presses
+	if ((XGpio_InterruptGetStatus(&BTNInst) & BTN_INT_MASK) != BTN_INT_MASK) {  return;  }
+	btn_value = XGpio_DiscreteRead(&BTNInst, 1);
+// Increment counter based on button value
+//button change on both edges will cause interrupt but only button value = 1 will be active.
+//	led_data = led_data + btn_value;
+
+	switch(btn_value){
+	case LEFT : movePlayerLeft(pFrames[dispCtrl.curFrame], GAME_STRIDE);
+						break;
+
+	case RIGHT: movePlayerRight(pFrames[dispCtrl.curFrame], GAME_STRIDE);
+						break;
+	}
+
+    XGpio_InterruptClear(&BTNInst, BTN_INT_MASK);
+    XGpio_InterruptEnable(&BTNInst, BTN_INT_MASK);
+} //end BTN_Intr_Handler()
+
+
+void TMR_Intr_Handler(void *data)
+{
+	static int tmr_count = 0;	//local and permanent variable
+
+	if (XTmrCtr_IsExpired(&TMRInst,0)){
+		updateEnemyPositions();
+	}
+
+	XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD);
+	XTmrCtr_Start(&TMRInst,0);
+
+}	//end TMR_Intr_Handler
+
+int SetupPushbuttons(XGpio *Pushbuttondevice, int DeviceID) {
+	int status;
+	// Initialize Push Buttons
+	  status = XGpio_Initialize(Pushbuttondevice, DeviceID);
+	  if(status != XST_SUCCESS) return XST_FAILURE;
+	  // Set all buttons direction to inputs
+	  XGpio_SetDataDirection(Pushbuttondevice, 1, 0xFF);
+	  // Level 3: Enable GPIO interrupts interrupt - JJS
+	  	XGpio_InterruptGlobalEnable(Pushbuttondevice);
+	  //Level 3: channel 1 only
+	  	XGpio_InterruptEnable(Pushbuttondevice, BTN_INT_MASK);
+	  	return XST_SUCCESS;
+} //end SetupPushbuttons()
+
+int SetupTimer(XTmrCtr *Timerdevice, int DeviceID) {
+	int status;
+	  status = XTmrCtr_Initialize(Timerdevice, DeviceID);
+	  if(status != XST_SUCCESS) return XST_FAILURE;
+//Level 3: timer. There is a warning on type mismatch for the handler but the statement works.
+	  XTmrCtr_SetHandler(Timerdevice, (XTmrCtr_Handler) TMR_Intr_Handler, Timerdevice);
+	  XTmrCtr_SetResetValue(Timerdevice, 0, TMR_LOAD);
+	  XTmrCtr_SetOptions(Timerdevice, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
+	  //Start timer
+	  XTmrCtr_Start(Timerdevice, 0);
+	  return XST_SUCCESS;
+} //end SetupTimer()
+
+
+int main(void)
+{
+	HardwareInitialize();
+
+	GameRun();
+
+	return 0;
+}
+
+void HardwareInitialize()
+{
+	int Status;
+	XAxiVdma_Config *vdmaConfig;
+	int i;
+
+	/*
+	 * Initialize an array of pointers to the 3 frame buffers
+	 */
+	for (i = 0; i < DISPLAY_NUM_FRAMES; i++)
+	{
+		pFrames[i] = frameBuf[i];
+	}
+
+	//setup the pointers to my 2 d frame
+	// sets up our 2D array for representing frames (C pointer stuff)
+//	for (i = 0; i < GAME_RES_HEIGHT; i++)
+//	{
+//		twoDFrameRep[i] = twoDFrame[i];
+//	}
+	/*
+	 * Initialize a timer used for a simple delay
+	 */
+	TimerInitialize(SCU_TIMER_ID);
+
+
+    /* Start the timer */
+
+
+	/*
+	 * Initialize VDMA driver
+	 */
+	vdmaConfig = XAxiVdma_LookupConfig(VDMA_ID);
+	if (!vdmaConfig)
+	{
+		xil_printf("No video DMA found for ID %d\r\n", VDMA_ID);
+		return;
+	}
+	Status = XAxiVdma_CfgInitialize(&vdma, vdmaConfig, vdmaConfig->BaseAddress);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("VDMA Configuration Initialization failed %d\r\n", Status);
+		return;
+	}
+
+	/*
+	 * Initialize the Display controller and start it
+	 */
+	Status = DisplayInitialize(&dispCtrl, &vdma, HDMI_OUT_VTC_ID, DYNCLK_BASEADDR, pFrames, GAME_STRIDE);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("Display Ctrl initialization failed during demo initialization%d\r\n", Status);
+		return;
+	}
+	Status = DisplayStart(&dispCtrl);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("Couldn't start display during demo initialization%d\r\n", Status);
+		return;
+	}
+
+
+
+	/*
+	 * Initialize the Interrupt controller and start it.
+	 */
+	Status = fnInitInterruptController(&intc);
+	if(Status != XST_SUCCESS) {
+		xil_printf("Error initializing interrupts");
+		return;
+	}
+
+	//if this breaks just remove
+	DisplayStop(&dispCtrl);
+	DisplaySetMode(&dispCtrl, &VMODE_1920x1080);
+	DisplayStart(&dispCtrl);
+
+	return;
+}
+
+
+void GameRun()
+{
+	char userInput = 0;
+
+	writeGameScreen(pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writePlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	spawnEnemy();
+
+
+	/* Flush UART FIFO */
+	while (XUartPs_IsReceiveData(UART_BASEADDR))
+	{
+		XUartPs_ReadReg(UART_BASEADDR, XUARTPS_FIFO_OFFSET);
+	}
+
+
+	while (userInput != 'q')
+	{
+		fRefresh = 0;
+
+		Xil_DCacheFlushRange((unsigned int) pFrames[dispCtrl.curFrame], FRAME_ARRAY_SIZE);
+
+		/* Wait for data on UART */
+		while (!XUartPs_IsReceiveData(UART_BASEADDR) && !fRefresh)
+		{}
+
+
+
+		/* Store the first character in the UART receive FIFO and echo it */
+		if (XUartPs_IsReceiveData(UART_BASEADDR))
+		{
+			userInput = XUartPs_ReadReg(UART_BASEADDR, XUARTPS_FIFO_OFFSET);
+			xil_printf("%c", userInput);
+		}
+		else  //Refresh triggered by video detect interrupt
+		{
+			userInput = 'r';
+		}
+
+
+
+		switch (userInput)
+		{
+		case 'x':
+			updateEnemyPositions();
+			spawnEnemy();
+			break;
+		case '+':
+			score += 100;
+			writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case '-':
+			score -= 100;
+			writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case ',':
+			movePlayerLeft(pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case '.':
+			movePlayerRight(pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 'q':
+			break;
+		case 'r':
+			break;
+		default :
+			xil_printf("\n\rInvalid Selection");
+			TimerDelay(500000);
+		}
+	}
+
+	return;
+}
+
+void movePlayerLeft(){
+	switch(playerPos){
+		case COL1_COORD:
+			playerPos = COL1_COORD;
+			clearPlayer(COL1_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL2_COORD:
+			playerPos = COL1_COORD;
+			clearPlayer(COL2_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL3_COORD:
+			playerPos = COL2_COORD;
+			clearPlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL4_COORD:
+			playerPos = COL3_COORD;
+			clearPlayer(COL4_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL5_COORD:
+			playerPos = COL4_COORD;
+			clearPlayer(COL5_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+	}
+	writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+
+}
+
+void movePlayerRight(){
+	switch(playerPos){
+		case COL1_COORD:
+			playerPos = COL2_COORD;
+			clearPlayer(COL1_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL2_COORD:
+			playerPos = COL3_COORD;
+			clearPlayer(COL2_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL3_COORD:
+			playerPos = COL4_COORD;
+			clearPlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL4_COORD:
+			playerPos = COL5_COORD;
+			clearPlayer(COL4_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case COL5_COORD:
+			playerPos = COL5_COORD;
+			clearPlayer(COL5_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+	}
+
+	writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+
+}
+
+void spawnEnemy(){
+	int r = (rand()%5)+1; //this should give me a number between 1 and 5
+
+	switch(r){
+		case 1:
+			enemyArray[1] = COL1_COORD;
+			writeEnemy(COL1_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 2:
+			enemyArray[1] = COL2_COORD;
+			writeEnemy(COL2_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 3:
+			enemyArray[1] = COL3_COORD;
+			writeEnemy(COL3_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 4:
+			enemyArray[1] = COL4_COORD;
+			writeEnemy(COL4_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+		case 5:
+			enemyArray[1] = COL5_COORD;
+			writeEnemy(COL5_COORD, ROW1_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+			break;
+	}
+
+}
+
+void updateEnemyPosition(int enemy){
+
+}
+
+void updateEnemyPositions(){
+	int i = 0;
+	int temp1 = 0;
+	int temp2 = 0;
+
+	for(i = 1; i < 15; i++){
+		temp1 = enemyArray[i];
+		clearPlayer(enemyArray[i], i*72, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		enemyArray[i] = temp2;
+		temp2 = temp1;
+	}
+
+	i=1;
+	while(i<15){
+		writeEnemy(enemyArray[i], (i)*72, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+		i++;
+	}
+
+}

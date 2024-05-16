@@ -1,0 +1,276 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu May  9 16:17:02 2024
+# Process ID: 15096
+# Current directory: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent23924 C:\Users\parks13\Desktop\ECE530\hdmiworking\vivado_proj\Zybo-Z7-20-HDMI.xpr
+# Log file: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/vivado.log
+# Journal file: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.xpr
+INFO: [Project 1-313] Project file moved from 'C:/Users/arthur/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-21456-WK142/PrjAr/_X_' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.ipdefs/repo_0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2019.1/data/ip'.
+WARNING: [BD 41-1661] One or more IPs have been locked in the design 'design_1.bd'. Please run report_ip_status for more details and recommendations on how to fix this issue.
+List of locked IPs:
+design_1_axi_vdma_0_0
+design_1_axi_gpio_video_0
+design_1_dvi2rgb_1_0
+design_1_auto_pc_1
+design_1_axi_mem_intercon_HP0_0
+design_1_ps7_0_axi_periph_GP0_0
+design_1_axis_subset_converter_in_0
+design_1_rst_ps7_0_133M_0
+design_1_rst_ps7_0_100M_0
+design_1_axis_subset_converter_out_0
+design_1_proc_sys_reset_0_0
+design_1_xbar_1
+design_1_v_axi4s_vid_out_0_0
+design_1_v_tc_out_0
+design_1_v_tc_in_0
+design_1_v_vid_in_axi4s_0_0
+design_1_xlconcat_0_0
+design_1_xlconstant_0_0
+design_1_xbar_0
+design_1_auto_pc_0
+
+open_project: Time (s): cpu = 00:00:23 ; elapsed = 00:00:12 . Memory (MB): peak = 874.223 ; gain = 248.277
+report_ip_status -name ip_status 
+update_compile_order -fileset sources_1
+upgrade_ip [get_ips  {design_1_v_vid_in_axi4s_0_0 design_1_axi_vdma_0_0 design_1_xlconcat_0_0 design_1_axi_mem_intercon_HP0_0 design_1_proc_sys_reset_0_0 design_1_dvi2rgb_1_0 design_1_rst_ps7_0_133M_0 design_1_v_tc_out_0 design_1_ps7_0_axi_periph_GP0_0 design_1_xlconstant_0_0 design_1_axi_gpio_video_0 design_1_axis_subset_converter_in_0 design_1_axis_subset_converter_out_0 design_1_v_axi4s_vid_out_0_0 design_1_rst_ps7_0_100M_0 design_1_v_tc_in_0}] -log ip_upgrade.log
+Adding component instance block -- digilentinc.com:ip:axi_dynclk:1.0 - axi_dynclk_0
+Adding component instance block -- xilinx.com:ip:axi_gpio:2.0 - axi_gpio_video
+Adding component instance block -- xilinx.com:ip:axi_vdma:6.3 - axi_vdma_0
+Adding component instance block -- xilinx.com:ip:axis_subset_converter:1.1 - axis_subset_converter_in
+Adding component instance block -- xilinx.com:ip:axis_subset_converter:1.1 - axis_subset_converter_out
+Adding component instance block -- digilentinc.com:ip:dvi2rgb:2.0 - dvi2rgb_1
+Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - proc_sys_reset_0
+Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0
+Adding component instance block -- digilentinc.com:ip:rgb2dvi:1.4 - rgb2dvi_0
+Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M
+Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_133M
+Adding component instance block -- xilinx.com:ip:v_axi4s_vid_out:4.0 - v_axi4s_vid_out_0
+Adding component instance block -- xilinx.com:ip:v_tc:6.1 - v_tc_out
+Adding component instance block -- xilinx.com:ip:v_tc:6.1 - v_tc_in
+Adding component instance block -- xilinx.com:ip:v_vid_in_axi4s:4.0 - v_vid_in_axi4s_0
+Adding component instance block -- xilinx.com:ip:xlconcat:2.1 - xlconcat_0
+Adding component instance block -- xilinx.com:ip:xlconstant:1.1 - xlconstant_0
+WARNING: [BD 41-1731] Type mismatch between connected pins: /axi_dynclk_0/LOCKED_O(undef) and /rgb2dvi_0/aRst_n(rst)
+WARNING: [BD 41-1731] Type mismatch between connected pins: /dvi2rgb_1/pLocked(undef) and /proc_sys_reset_0/aux_reset_in(rst)
+Adding component instance block -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Adding component instance block -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Successfully read diagram <design_1> from BD file <C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd>
+Upgrading 'C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd'
+INFO: [IP_Flow 19-3422] Upgraded design_1_axi_gpio_video_0 (AXI GPIO 2.0) from revision 19 to revision 21
+INFO: [IP_Flow 19-3422] Upgraded design_1_axi_mem_intercon_HP0_0 (AXI Interconnect 2.1) from revision 18 to revision 20
+INFO: [IP_Flow 19-3422] Upgraded design_1_axi_vdma_0_0 (AXI Video Direct Memory Access 6.3) from revision 5 to revision 7
+INFO: [IP_Flow 19-3422] Upgraded design_1_axis_subset_converter_in_0 (AXI4-Stream Subset Converter 1.1) from revision 17 to revision 19
+INFO: [IP_Flow 19-3422] Upgraded design_1_axis_subset_converter_out_0 (AXI4-Stream Subset Converter 1.1) from revision 17 to revision 19
+WARNING: [IP_Flow 19-3432] UI File c:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.ipdefs/repo_0/vivado-library/ip/dvi2rgb/xgui/dvi2rgb_v2_0.tcl does not exist
+WARNING: [IP_Flow 19-2991] No XGUI Files found 
+INFO: [IP_Flow 19-3420] Updated design_1_dvi2rgb_1_0 to use current project options
+WARNING: [BD 41-1731] Type mismatch between connected pins: /proc_sys_reset_0/aux_reset_in(rst) and /dvi2rgb_1_upgraded_ipi/pLocked(undef)
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+INFO: [IP_Flow 19-3422] Upgraded design_1_proc_sys_reset_0_0 (Processor System Reset 5.0) from revision 12 to revision 13
+WARNING: [BD 41-1731] Type mismatch between connected pins: /dvi2rgb_1/pLocked(undef) and /proc_sys_reset_0_upgraded_ipi/aux_reset_in(rst)
+INFO: [IP_Flow 19-3422] Upgraded design_1_ps7_0_axi_periph_GP0_0 (AXI Interconnect 2.1) from revision 18 to revision 20
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+INFO: [IP_Flow 19-3422] Upgraded design_1_rst_ps7_0_100M_0 (Processor System Reset 5.0) from revision 12 to revision 13
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+INFO: [IP_Flow 19-3422] Upgraded design_1_rst_ps7_0_133M_0 (Processor System Reset 5.0) from revision 12 to revision 13
+INFO: [IP_Flow 19-3422] Upgraded design_1_v_axi4s_vid_out_0_0 (AXI4-Stream to Video Out 4.0) from revision 9 to revision 10
+WARNING: [IP_Flow 19-4698] Upgrade has added port 'fifo_read_level'
+WARNING: [IP_Flow 19-3298] Detected external port differences while upgrading 'design_1_v_axi4s_vid_out_0_0'. These changes may impact your design.
+INFO: [IP_Flow 19-3422] Upgraded design_1_v_tc_in_0 (Video Timing Controller 6.1) from revision 12 to revision 13
+INFO: [IP_Flow 19-3422] Upgraded design_1_v_tc_out_0 (Video Timing Controller 6.1) from revision 12 to revision 13
+INFO: [IP_Flow 19-3422] Upgraded design_1_v_vid_in_axi4s_0_0 (Video In to AXI4-Stream 4.0) from revision 8 to revision 9
+INFO: [IP_Flow 19-3422] Upgraded design_1_xlconcat_0_0 (Concat 2.1) from revision 1 to revision 3
+INFO: [IP_Flow 19-3422] Upgraded design_1_xlconstant_0_0 (Constant 1.1) from revision 5 to revision 6
+CRITICAL WARNING: [Coretcl 2-1279] The upgrade of 'design_1_v_axi4s_vid_out_0_0' has identified issues that may require user intervention. Please review the upgrade log 'c:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/ip_upgrade.log', and verify that the upgraded IP is correctly configured.
+Wrote  : <C:\Users\parks13\Desktop\ECE530\hdmiworking\vivado_proj\Zybo-Z7-20-HDMI.srcs\sources_1\bd\design_1\design_1.bd> 
+INFO: [BD 41-2124] The block design file <C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd> has changed from an XML format to a JSON format. All flows are expected to work as in prior versions of Vivado. Please contact your Xilinx Support representative, in case of any issues.
+Wrote  : <C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/ui/bd_1f5defd0.ui> 
+INFO: [Coretcl 2-1525] Wrote upgrade log to 'C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/ip_upgrade.log'.
+upgrade_ip: Time (s): cpu = 00:00:28 ; elapsed = 00:00:24 . Memory (MB): peak = 1376.078 ; gain = 0.000
+export_ip_user_files -of_objects [get_ips {design_1_v_vid_in_axi4s_0_0 design_1_axi_vdma_0_0 design_1_xlconcat_0_0 design_1_axi_mem_intercon_HP0_0 design_1_proc_sys_reset_0_0 design_1_dvi2rgb_1_0 design_1_rst_ps7_0_133M_0 design_1_v_tc_out_0 design_1_ps7_0_axi_periph_GP0_0 design_1_xlconstant_0_0 design_1_axi_gpio_video_0 design_1_axis_subset_converter_in_0 design_1_axis_subset_converter_out_0 design_1_v_axi4s_vid_out_0_0 design_1_rst_ps7_0_100M_0 design_1_v_tc_in_0}] -no_script -sync -force -quiet
+generate_target all [get_files  C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd]
+WARNING: [BD 41-927] Following properties on pin /axi_dynclk_0/REF_CLK_I have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_processing_system7_0_0_FCLK_CLK0 
+WARNING: [BD 41-927] Following properties on pin /axi_dynclk_0/PXL_CLK_O have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_axi_dynclk_0_0_PXL_CLK_O 
+WARNING: [BD 41-927] Following properties on pin /axi_dynclk_0/PXL_CLK_5X_O have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_axi_dynclk_0_0_PXL_CLK_5X_O 
+WARNING: [BD 41-927] Following properties on pin /axi_dynclk_0/s00_axi_aclk have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_processing_system7_0_0_FCLK_CLK0 
+WARNING: [BD 41-927] Following properties on pin /rgb2dvi_0/PixelClk have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_axi_dynclk_0_0_PXL_CLK_O 
+WARNING: [BD 41-927] Following properties on pin /rgb2dvi_0/SerialClk have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_axi_dynclk_0_0_PXL_CLK_5X_O 
+WARNING: [BD 41-927] Following properties on pin /dvi2rgb_1/RefClk have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_processing_system7_0_0_FCLK_CLK2 
+WARNING: [BD 41-927] Following properties on pin /dvi2rgb_1/PixelClk have been updated from connected ip. They may not be synchronized with cell properties. You can set property on pin directly to confirm the value and resolve the warning.
+	CLK_DOMAIN=design_1_dvi2rgb_1_0_PixelClk 
+Wrote  : <C:\Users\parks13\Desktop\ECE530\hdmiworking\vivado_proj\Zybo-Z7-20-HDMI.srcs\sources_1\bd\design_1\design_1.bd> 
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/axi_mem_intercon_HP0/m00_couplers/auto_pc/m_axi_bid'(1) to net 'auto_pc_to_m00_couplers_BID'(6) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/axi_mem_intercon_HP0/m00_couplers/auto_pc/m_axi_rid'(1) to net 'auto_pc_to_m00_couplers_RID'(6) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_AWID'(6) to net 'axi_mem_intercon_M00_AXI_AWID'(1) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_WID'(6) to net 'axi_mem_intercon_M00_AXI_WID'(1) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_ARID'(6) to net 'axi_mem_intercon_M00_AXI_ARID'(1) - Only lower order bits will be connected.
+VHDL Output written to : C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/synth/design_1.v
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/axi_mem_intercon_HP0/m00_couplers/auto_pc/m_axi_bid'(1) to net 'auto_pc_to_m00_couplers_BID'(6) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/axi_mem_intercon_HP0/m00_couplers/auto_pc/m_axi_rid'(1) to net 'auto_pc_to_m00_couplers_RID'(6) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_AWID'(6) to net 'axi_mem_intercon_M00_AXI_AWID'(1) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_WID'(6) to net 'axi_mem_intercon_M00_AXI_WID'(1) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/processing_system7_0/S_AXI_HP0_ARID'(6) to net 'axi_mem_intercon_M00_AXI_ARID'(1) - Only lower order bits will be connected.
+VHDL Output written to : C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/sim/design_1.v
+VHDL Output written to : C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_dynclk_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_gpio_video .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_vdma_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axis_subset_converter_in .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axis_subset_converter_out .
+CRITICAL WARNING: [IP_Flow 19-4965] IP ila_refclk was packaged with board value 'digilentinc.com:nexys_video:part0:1.1'. Current project's board value is 'digilentinc.com:zybo-z7-20:part0:1.0'. Please update the project settings to match the packaged IP.
+INFO: [IP_Flow 19-3422] Upgraded ila_refclk (ILA (Integrated Logic Analyzer) 6.2) from revision 7 to revision 9
+CRITICAL WARNING: [IP_Flow 19-4965] IP ila_pixclk was packaged with board value 'digilentinc.com:nexys_video:part0:1.1'. Current project's board value is 'digilentinc.com:zybo-z7-20:part0:1.0'. Please update the project settings to match the packaged IP.
+INFO: [IP_Flow 19-3422] Upgraded ila_pixclk (ILA (Integrated Logic Analyzer) 6.2) from revision 7 to revision 9
+INFO: [BD 41-1029] Generation completed for the IP Integrator block dvi2rgb_1 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block proc_sys_reset_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block processing_system7_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block rgb2dvi_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_ps7_0_100M .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_ps7_0_133M .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block v_axi4s_vid_out_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block v_tc_out .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block v_tc_in .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block v_vid_in_axi4s_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block xlconcat_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block xlconstant_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_mem_intercon_HP0/xbar .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ps7_0_axi_periph_GP0/xbar .
+WARNING: [IP_Flow 19-4994] Overwriting existing constraint file 'c:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc'
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_mem_intercon_HP0/m00_couplers/auto_pc .
+WARNING: [IP_Flow 19-4994] Overwriting existing constraint file 'c:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1_ooc.xdc'
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ps7_0_axi_periph_GP0/s00_couplers/auto_pc .
+Exporting to file C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/hw_handoff/design_1.hwh
+Generated Block Design Tcl file C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/hw_handoff/design_1_bd.tcl
+Generated Hardware Definition File C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/synth/design_1.hwdef
+generate_target: Time (s): cpu = 00:01:35 ; elapsed = 00:01:33 . Memory (MB): peak = 1376.078 ; gain = 0.000
+catch { config_ip_cache -export [get_ips -all design_1_axi_dynclk_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_axi_gpio_video_0] }
+catch { config_ip_cache -export [get_ips -all design_1_axi_vdma_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_axis_subset_converter_in_0] }
+catch { config_ip_cache -export [get_ips -all design_1_axis_subset_converter_out_0] }
+catch { config_ip_cache -export [get_ips -all design_1_dvi2rgb_1_0] }
+catch { config_ip_cache -export [get_ips -all design_1_proc_sys_reset_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_processing_system7_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_rgb2dvi_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_rst_ps7_0_100M_0] }
+catch { config_ip_cache -export [get_ips -all design_1_rst_ps7_0_133M_0] }
+catch { config_ip_cache -export [get_ips -all design_1_v_axi4s_vid_out_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_v_tc_out_0] }
+catch { config_ip_cache -export [get_ips -all design_1_v_tc_in_0] }
+catch { config_ip_cache -export [get_ips -all design_1_v_vid_in_axi4s_0_0] }
+catch { config_ip_cache -export [get_ips -all design_1_xbar_2] }
+catch { config_ip_cache -export [get_ips -all design_1_xbar_3] }
+catch { config_ip_cache -export [get_ips -all design_1_auto_pc_0] }
+catch { config_ip_cache -export [get_ips -all design_1_auto_pc_1] }
+export_ip_user_files -of_objects [get_files C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd]
+launch_runs -jobs 6 {design_1_axi_dynclk_0_0_synth_1 design_1_rgb2dvi_0_0_synth_1 design_1_processing_system7_0_0_synth_1 design_1_axi_gpio_video_0_synth_1 design_1_axi_vdma_0_0_synth_1 design_1_axis_subset_converter_in_0_synth_1 design_1_axis_subset_converter_out_0_synth_1 design_1_dvi2rgb_1_0_synth_1 design_1_proc_sys_reset_0_0_synth_1 design_1_rst_ps7_0_100M_0_synth_1 design_1_rst_ps7_0_133M_0_synth_1 design_1_v_axi4s_vid_out_0_0_synth_1 design_1_v_tc_out_0_synth_1 design_1_v_tc_in_0_synth_1 design_1_v_vid_in_axi4s_0_0_synth_1 design_1_xbar_2_synth_1 design_1_xbar_3_synth_1 design_1_auto_pc_0_synth_1 design_1_auto_pc_1_synth_1}
+[Thu May  9 16:20:11 2024] Launched design_1_axi_dynclk_0_0_synth_1, design_1_rgb2dvi_0_0_synth_1, design_1_processing_system7_0_0_synth_1, design_1_axi_gpio_video_0_synth_1, design_1_axi_vdma_0_0_synth_1, design_1_axis_subset_converter_in_0_synth_1, design_1_axis_subset_converter_out_0_synth_1, design_1_dvi2rgb_1_0_synth_1, design_1_proc_sys_reset_0_0_synth_1, design_1_rst_ps7_0_100M_0_synth_1, design_1_rst_ps7_0_133M_0_synth_1, design_1_v_axi4s_vid_out_0_0_synth_1, design_1_v_tc_out_0_synth_1, design_1_v_tc_in_0_synth_1, design_1_v_vid_in_axi4s_0_0_synth_1, design_1_xbar_2_synth_1, design_1_xbar_3_synth_1, design_1_auto_pc_0_synth_1, design_1_auto_pc_1_synth_1...
+Run output will be captured here:
+design_1_axi_dynclk_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_dynclk_0_0_synth_1/runme.log
+design_1_rgb2dvi_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rgb2dvi_0_0_synth_1/runme.log
+design_1_processing_system7_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_processing_system7_0_0_synth_1/runme.log
+design_1_axi_gpio_video_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_gpio_video_0_synth_1/runme.log
+design_1_axi_vdma_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_vdma_0_0_synth_1/runme.log
+design_1_axis_subset_converter_in_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axis_subset_converter_in_0_synth_1/runme.log
+design_1_axis_subset_converter_out_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axis_subset_converter_out_0_synth_1/runme.log
+design_1_dvi2rgb_1_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_dvi2rgb_1_0_synth_1/runme.log
+design_1_proc_sys_reset_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_proc_sys_reset_0_0_synth_1/runme.log
+design_1_rst_ps7_0_100M_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rst_ps7_0_100M_0_synth_1/runme.log
+design_1_rst_ps7_0_133M_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rst_ps7_0_133M_0_synth_1/runme.log
+design_1_v_axi4s_vid_out_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_axi4s_vid_out_0_0_synth_1/runme.log
+design_1_v_tc_out_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_tc_out_0_synth_1/runme.log
+design_1_v_tc_in_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_tc_in_0_synth_1/runme.log
+design_1_v_vid_in_axi4s_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_vid_in_axi4s_0_0_synth_1/runme.log
+design_1_xbar_2_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_xbar_2_synth_1/runme.log
+design_1_xbar_3_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_xbar_3_synth_1/runme.log
+design_1_auto_pc_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_auto_pc_0_synth_1/runme.log
+design_1_auto_pc_1_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_auto_pc_1_synth_1/runme.log
+launch_runs: Time (s): cpu = 00:00:05 ; elapsed = 00:00:11 . Memory (MB): peak = 1382.848 ; gain = 6.770
+export_simulation -of_objects [get_files C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd] -directory C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.ip_user_files -ipstatic_source_dir C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.cache/compile_simlib/modelsim} {questa=C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.cache/compile_simlib/questa} {riviera=C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.cache/compile_simlib/riviera} {activehdl=C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 6
+[Thu May  9 16:21:37 2024] Launched design_1_axi_dynclk_0_0_synth_1, design_1_rgb2dvi_0_0_synth_1, design_1_processing_system7_0_0_synth_1, design_1_axi_gpio_video_0_synth_1, design_1_axi_vdma_0_0_synth_1, design_1_axis_subset_converter_out_0_synth_1, design_1_dvi2rgb_1_0_synth_1, design_1_proc_sys_reset_0_0_synth_1, design_1_rst_ps7_0_100M_0_synth_1, design_1_rst_ps7_0_133M_0_synth_1, design_1_v_axi4s_vid_out_0_0_synth_1, design_1_v_tc_out_0_synth_1, design_1_v_tc_in_0_synth_1, design_1_v_vid_in_axi4s_0_0_synth_1, design_1_xbar_2_synth_1, design_1_xbar_3_synth_1, design_1_auto_pc_0_synth_1, design_1_auto_pc_1_synth_1, synth_1...
+Run output will be captured here:
+design_1_axi_dynclk_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_dynclk_0_0_synth_1/runme.log
+design_1_rgb2dvi_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rgb2dvi_0_0_synth_1/runme.log
+design_1_processing_system7_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_processing_system7_0_0_synth_1/runme.log
+design_1_axi_gpio_video_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_gpio_video_0_synth_1/runme.log
+design_1_axi_vdma_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axi_vdma_0_0_synth_1/runme.log
+design_1_axis_subset_converter_out_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_axis_subset_converter_out_0_synth_1/runme.log
+design_1_dvi2rgb_1_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_dvi2rgb_1_0_synth_1/runme.log
+design_1_proc_sys_reset_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_proc_sys_reset_0_0_synth_1/runme.log
+design_1_rst_ps7_0_100M_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rst_ps7_0_100M_0_synth_1/runme.log
+design_1_rst_ps7_0_133M_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_rst_ps7_0_133M_0_synth_1/runme.log
+design_1_v_axi4s_vid_out_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_axi4s_vid_out_0_0_synth_1/runme.log
+design_1_v_tc_out_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_tc_out_0_synth_1/runme.log
+design_1_v_tc_in_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_tc_in_0_synth_1/runme.log
+design_1_v_vid_in_axi4s_0_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_v_vid_in_axi4s_0_0_synth_1/runme.log
+design_1_xbar_2_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_xbar_2_synth_1/runme.log
+design_1_xbar_3_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_xbar_3_synth_1/runme.log
+design_1_auto_pc_0_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_auto_pc_0_synth_1/runme.log
+design_1_auto_pc_1_synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/design_1_auto_pc_1_synth_1/runme.log
+synth_1: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/synth_1/runme.log
+[Thu May  9 16:21:39 2024] Launched impl_1...
+Run output will be captured here: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1386.117 ; gain = 3.270
+open_run impl_1
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Netlist 29-17] Analyzing 1010 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2019.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2411.918 ; gain = 3.180
+Restored from archive | CPU: 2.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2411.918 ; gain = 3.180
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 2411.918 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 216 instances were transformed.
+  CFGLUT5 => CFGLUT5 (SRLC32E, SRL16E): 192 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 4 instances
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 16 instances
+  RAM32X1D => RAM32X1D (RAMD32, RAMD32): 1 instances
+  SRLC32E => SRL16E: 3 instances
+
+open_run: Time (s): cpu = 00:00:39 ; elapsed = 00:00:39 . Memory (MB): peak = 2566.543 ; gain = 1162.723
+open_report: Time (s): cpu = 00:00:21 ; elapsed = 00:00:15 . Memory (MB): peak = 2623.695 ; gain = 41.281
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+file mkdir C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk
+file copy -force C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.runs/impl_1/design_1_wrapper.sysdef C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk/design_1_wrapper.hdf
+
+launch_sdk -workspace C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk -hwspec C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-393] Launching SDK...
+INFO: [Vivado 12-417] Running xsdk -workspace C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk -hwspec C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-3157] SDK launch initiated. Please check console for any further messages.
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu May  9 16:47:58 2024...
