@@ -298,6 +298,35 @@ void writeEnemy(u32 x, u32 y, u8* frame, u32 stride){
 	}
 }
 
+void writeLife(u32 x, u32 y, u8* frame, u32 stride){
+	u32 max_x = x+36;//36 is how wide characters are
+	u32 max_y = y+36;//36 is how tall characters are
+	int i;
+	for(i = x; i < max_x; i++){
+		int j;
+		for (j = y; j < max_y; j++){
+			frame[i*3+j*stride] = 0;
+			frame[i*3+j*stride + 1] = 0;
+			frame[i*3+j*stride + 2] = 255;
+		}
+	}
+}
+
+void clearLife(u32 x, u32 y, u8* frame, u32 stride){
+	u32 max_x = x+36;//36 is how wide characters are
+	u32 max_y = y+36;//36 is how tall characters are
+	int i;
+	for(i = x; i < max_x; i++){
+		int j;
+		for (j = y; j < max_y; j++){
+			frame[i*3+j*stride] = 0;
+			frame[i*3+j*stride + 1] = 0;
+			frame[i*3+j*stride + 2] = 0;
+		}
+	}
+}
+
+
 void writeScore(u32 x, u32 y, int score, u8* frame, u32 stride){
 	char val[49];//screen can fit 48 characters the way I am laying it out so we just add one for null terminator
 	itoa(score, val, 10);//10 means base ten so it will be a decimal number
@@ -363,6 +392,7 @@ void writeGameScreen(u8 * frame, u32 stride){
 		}
 	}
 }
+
 
 //void drawFrame(rgb_val ** twoDRGBArray, u8 *frame, u32 width, u32 height, u32 stride){
 //	int i;

@@ -20,6 +20,9 @@ char fRefresh; //flag used to trigger a refresh of the Menu on video detect
 int playerPos = COL3_COORD;
 int score = 0;
 int enemyArray[15];
+int life = 4;
+int timerCount = 0;
+int HEART_SIZE =46;
 
 //Timer load value:  Count up timer (0xFFFFFFFF - 0xF8000000)=0x7FFFFFF=134217727
 //134217727/50MHz = 134217727*20ns=1342177270ns = 2.684 (seconds)
@@ -28,7 +31,6 @@ int enemyArray[15];
 int timer_load_value;
 
 XScuTimer TimerInstance;
-
 
 
 XGpio LEDInst, BTNInst, SWSInst;
@@ -88,19 +90,28 @@ void BTN_Intr_Handler(void *InstancePtr)
 
 void TMR_Intr_Handler(void *data)
 {
-	static int tmr_count = 0;	//local and permanent variable
 
 	if (XTmrCtr_IsExpired(&TMRInst,0)){
+		timerCount++;
 
 		spawnEnemy();
 		updateEnemyPositions();
 		writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
+
 		if(playerPos == enemyArray[14]){
-			xil_printf("hit--\r\n");
 			score += 100;
 			writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+
+		}else{
+			if(enemyArray[14] != 0){
+				life--;
+				clearLife(HEART_SIZE*life + (4*life), 80, pFrames[dispCtrl.curFrame],  GAME_STRIDE);
+				xil_printf("life : %d \r\n", life);
+			}
+
 		}
+
 		Xil_DCacheFlushRange((unsigned int) pFrames[dispCtrl.curFrame], FRAME_ARRAY_SIZE);
 
 	//	xil_printf("every 1 sec test--\r\n");
@@ -278,7 +289,17 @@ void GameRun()
 	writeGameScreen(pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writePlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+
+	writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writeLife(HEART_SIZE + 4, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writeLife(HEART_SIZE*2 +8, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+	writeLife(HEART_SIZE*3 +12, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+
+
 	while(1){
+		if(life == 0){
+			XTmrCtr_Stop(&TMRInst,0);
+		}
 
 	}
 
@@ -429,6 +450,12 @@ void spawnEnemy(){
 	}
 
 }
+
+//void removeLife(int lifeleft){
+//	for(int j = 0; j < lifeleft; j++){
+//		writeLife()
+//	}
+//}
 
 
 

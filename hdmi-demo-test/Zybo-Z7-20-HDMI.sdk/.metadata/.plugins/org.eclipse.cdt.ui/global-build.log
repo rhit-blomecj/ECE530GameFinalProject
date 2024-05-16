@@ -9959,3 +9959,902 @@ make pre-build main-build
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for 'main-build'.
+14:49:27 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+'Finished building: ../src/non_two_d_frame_writing.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84392	   2520	6247120	6334032	 60a650	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:04:45 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:96:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:97:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:290:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:291:12: error: 'HEART_SIZE' undeclared (first use in this function)
+  writeLife(HEART_SIZE + 4, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+            ^~~~~~~~~~
+../src/project_main.c:291:12: note: each undeclared identifier is reported only once for each function it appears in
+../src/project_main.c:284:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:420:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:96:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c: In function 'removeLife':
+../src/project_main.c:450:14: error: expected ';' before '}' token
+   writeLife()
+              ^
+              ;
+  }
+  ~            
+../src/project_main.c: At top level:
+../src/project_main.c:456:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+make: *** [src/subdir.mk:26: src/project_main.o] Error 1
+15:05:48 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:291:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:285:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:421:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c: In function 'removeLife':
+../src/project_main.c:451:14: error: expected ';' before '}' token
+   writeLife()
+              ^
+              ;
+  }
+  ~            
+../src/project_main.c: At top level:
+../src/project_main.c:457:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+make: *** [src/subdir.mk:26: src/project_main.o] Error 1
+15:06:00 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:291:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:285:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:421:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:457:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:06:16 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+'Finished building: ../src/non_two_d_frame_writing.c'
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+In file included from ../src/project_main.c:1:
+../src/project_main.h:91:21: error: expected identifier or '(' before numeric constant
+ #define HEART_SIZE  36
+                     ^~
+../src/project_main.c:25:5: note: in expansion of macro 'HEART_SIZE'
+ int HEART_SIZE =46;
+     ^~~~~~~~~~
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:291:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:285:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:421:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:457:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+make: *** [src/subdir.mk:26: src/project_main.o] Error 1
+15:07:48 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+'Finished building: ../src/non_two_d_frame_writing.c'
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:291:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:285:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:421:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:457:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:07:59 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:08:40 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:10:40 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:293:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:287:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:423:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:459:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:12:35 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+'Finished building: ../src/non_two_d_frame_writing.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:12:57 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:14:58 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:53:25: error: expected identifier or '(' before numeric constant
+ #define GAME_RES_WIDTH  1920
+                         ^~~~
+../src/project_main.h:68:22: note: in expansion of macro 'GAME_RES_WIDTH'
+ #define COL1_COORD ((GAME_RES_WIDTH-360)/2)
+                      ^~~~~~~~~~~~~~
+../src/non_two_d_frame_writing.c:396:1: note: in expansion of macro 'COL1_COORD'
+ COL1_COORD
+ ^~~~~~~~~~
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:68:41: error: expected ')' before '/' token
+ #define COL1_COORD ((GAME_RES_WIDTH-360)/2)
+                                         ^
+../src/non_two_d_frame_writing.c:396:1: note: in expansion of macro 'COL1_COORD'
+ COL1_COORD
+ ^~~~~~~~~~
+make: *** [src/subdir.mk:26: src/non_two_d_frame_writing.o] Error 1
+15:15:09 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/non_two_d_frame_writing.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/non_two_d_frame_writing.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/non_two_d_frame_writing.d" -MT"src/non_two_d_frame_writing.o" -o "src/non_two_d_frame_writing.o" "../src/non_two_d_frame_writing.c"
+In file included from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/non_two_d_frame_writing.h:13,
+                 from ../src/non_two_d_frame_writing.c:16:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+'Finished building: ../src/non_two_d_frame_writing.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:15:40 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:16:36 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:293:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:287:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:423:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:459:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:17:01 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:17:38 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:293:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:287:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:423:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:459:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84724	   2528	6247120	6334372	 60a7a4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:19:32 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:297:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:291:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:427:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:463:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84804	   2528	6247120	6334452	 60a7f4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:19:50 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:21:10 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:294:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:288:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:427:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:463:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84804	   2528	6247120	6334452	 60a7f4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:21:34 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:21:57 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:294:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:288:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:427:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:463:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84804	   2528	6247120	6334452	 60a7f4	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:22:19 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.
+15:26:47 **** Auto Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/project_main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/project_main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../hdmiProject_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/project_main.d" -MT"src/project_main.o" -o "src/project_main.o" "../src/project_main.c"
+In file included from ../src/project_main.c:1:
+../src/project_main.h:42: warning: "INTC_DEVICE_ID" redefined
+ #define INTC_DEVICE_ID   XPAR_PS7_SCUGIC_0_DEVICE_ID
+ 
+In file included from ../src/project_main.h:15,
+                 from ../src/project_main.c:1:
+../src/intc/intc.h:74: note: this is the location of the previous definition
+  #define INTC_DEVICE_ID XPAR_SCUGIC_SINGLE_DEVICE_ID
+ 
+../src/project_main.c: In function 'TMR_Intr_Handler':
+../src/project_main.c:97:3: warning: implicit declaration of function 'spawnEnemy'; did you mean 'writeEnemy'? [-Wimplicit-function-declaration]
+   spawnEnemy();
+   ^~~~~~~~~~
+   writeEnemy
+../src/project_main.c:98:3: warning: implicit declaration of function 'updateEnemyPositions' [-Wimplicit-function-declaration]
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:109:5: warning: implicit declaration of function 'clearLife'; did you mean 'clearerr'? [-Wimplicit-function-declaration]
+     clearLife(HEART_SIZE*life + (4*life), 80, pFrames[dispCtrl.curFrame],  GAME_STRIDE);
+     ^~~~~~~~~
+     clearerr
+../src/project_main.c: In function 'GameRun':
+../src/project_main.c:293:2: warning: implicit declaration of function 'writeLife'; did you mean 'writeScore'? [-Wimplicit-function-declaration]
+  writeLife(0, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
+  ^~~~~~~~~
+  writeScore
+../src/project_main.c:287:7: warning: unused variable 'userInput' [-Wunused-variable]
+  char userInput = 0;
+       ^~~~~~~~~
+../src/project_main.c: At top level:
+../src/project_main.c:426:6: warning: conflicting types for 'spawnEnemy'
+ void spawnEnemy(){
+      ^~~~~~~~~~
+../src/project_main.c:97:3: note: previous implicit declaration of 'spawnEnemy' was here
+   spawnEnemy();
+   ^~~~~~~~~~
+../src/project_main.c:462:6: warning: conflicting types for 'updateEnemyPositions'
+ void updateEnemyPositions(){
+      ^~~~~~~~~~~~~~~~~~~~
+../src/project_main.c:98:3: note: previous implicit declaration of 'updateEnemyPositions' was here
+   updateEnemyPositions();
+   ^~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/project_main.c'
+' '
+'Building target: hdmiProject.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../hdmiProject_bsp/ps7_cortexa9_0/lib -o "hdmiProject.elf"  ./src/timer_ps/timer_ps.o  ./src/intc/intc.o  ./src/dynclk/dynclk.o  ./src/display_ctrl/display_ctrl.o  ./src/non_two_d_frame_writing.o ./src/project_main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: hdmiProject.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size hdmiProject.elf  |tee "hdmiProject.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  84848	   2528	6247120	6334496	 60a820	hdmiProject.elf
+'Finished building: hdmiProject.elf.size'
+' '
+15:27:07 **** Incremental Build of configuration Debug for project hdmiProject ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for 'main-build'.

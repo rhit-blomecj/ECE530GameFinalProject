@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="//void removeLife(int lifeleft){"/>
 			<item value="playerpos"/>
 			<item value="INTC"/>
 			<item value="INTC_DEVICE_ID"/>
@@ -15,7 +16,6 @@
 			<item value="timer"/>
 			<item value="writebyte"/>
 			<item value="65"/>
-			<item value="xcoi"/>
 		</list>
 		<list key="replacehistory">
 		</list>

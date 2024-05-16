@@ -2,15 +2,14 @@
 # Vivado v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Fri May 10 16:03:25 2024
-# Process ID: 17272
-# Current directory: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent24120 C:\Users\parks13\Desktop\ECE530\hdmiworking\vivado_proj\Zybo-Z7-20-HDMI.xpr
-# Log file: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/vivado.log
-# Journal file: C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj\vivado.jou
+# Start of session at: Thu May 16 14:38:04 2024
+# Process ID: 22880
+# Current directory: C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5340 C:\Users\parks13\Documents\GitHub\ECE530\ECE530GameFinalProject\hdmi-demo-test\Zybo-Z7-20-HDMI.xpr
+# Log file: C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test/vivado.log
+# Journal file: C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.xpruupdate_compile_order -fileset sources_1
-open_bd_design {C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.srcs/sources_1/bd/design_1/design_1.bd}
-write_bd_layout -format pdf -orientation landscape C:/Users/parks13/Desktop/design_1.pdf
-launch_sdk -workspace C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk -hwspec C:/Users/parks13/Desktop/ECE530/hdmiworking/vivado_proj/Zybo-Z7-20-HDMI.sdk/design_1_wrapper.hdf
+open_project C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test/Zybo-Z7-20-HDMI.xpr
+update_compile_order -fileset sources_1
+launch_sdk -workspace C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test/Zybo-Z7-20-HDMI.sdk -hwspec C:/Users/parks13/Documents/GitHub/ECE530/ECE530GameFinalProject/hdmi-demo-test/Zybo-Z7-20-HDMI.sdk/design_1_wrapper.hdf

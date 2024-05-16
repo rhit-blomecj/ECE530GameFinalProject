@@ -88,6 +88,7 @@
 #define ROW13_Y_COORD	ROW12_Y_COORD+72
 #define ROW14_Y_COORD	ROW13_Y_COORD+72
 
+
 void HardwareInitialize();
 void GameRun();
 
