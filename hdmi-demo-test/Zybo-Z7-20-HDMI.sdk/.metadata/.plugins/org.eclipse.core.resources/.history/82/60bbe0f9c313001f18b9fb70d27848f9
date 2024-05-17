@@ -82,8 +82,8 @@ void BTN_Intr_Handler(void *InstancePtr)
 	case RESET:
 
 		prepareStartScreen();
-//		life = 4;
-		XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*8);
+		life = 4;
+		XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*10);
 		XTmrCtr_Start(&TMRInst,0);
 
 
@@ -104,9 +104,8 @@ void TMR_Intr_Handler(void *data)
 	if (XTmrCtr_IsExpired(&TMRInst,0)){
 		timerCount++;
 
-
-		updateEnemyPositions();
 		spawnEnemy();
+		updateEnemyPositions();
 		writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 
@@ -128,7 +127,7 @@ void TMR_Intr_Handler(void *data)
 	//	xil_printf("every 1 sec test--\r\n");
 	}
 
-	XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*8);
+	XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*10);
 	XTmrCtr_Start(&TMRInst,0);
 
 }	//end TMR_Intr_Handler
@@ -299,7 +298,7 @@ void prepareStartScreen(){
 	for(;i< 15; i++){
 		enemyArray[i] = 0;
 	}
-	life = 4;
+	int life = 4;
 	writeGameScreen(pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writePlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);

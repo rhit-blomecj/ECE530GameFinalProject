@@ -82,8 +82,8 @@ void BTN_Intr_Handler(void *InstancePtr)
 	case RESET:
 
 		prepareStartScreen();
-//		life = 4;
-		XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*8);
+		life = 4;
+		XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*10);
 		XTmrCtr_Start(&TMRInst,0);
 
 

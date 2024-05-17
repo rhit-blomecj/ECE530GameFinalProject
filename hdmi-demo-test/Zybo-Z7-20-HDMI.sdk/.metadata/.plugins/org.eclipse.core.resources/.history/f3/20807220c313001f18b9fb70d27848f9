@@ -22,7 +22,7 @@ int score = 0;
 int enemyArray[15];
 int life = 4;
 int timerCount = 0;
-#define HEART_SIZE 46
+int HEART_SIZE =46;
 
 //Timer load value:  Count up timer (0xFFFFFFFF - 0xF8000000)=0x7FFFFFF=134217727
 //134217727/50MHz = 134217727*20ns=1342177270ns = 2.684 (seconds)
@@ -81,12 +81,7 @@ void BTN_Intr_Handler(void *InstancePtr)
 						break;
 	case RESET:
 
-		prepareStartScreen();
-//		life = 4;
-		XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*8);
-		XTmrCtr_Start(&TMRInst,0);
-
-
+		clearPlayer(COL1_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 	}
 
@@ -104,9 +99,8 @@ void TMR_Intr_Handler(void *data)
 	if (XTmrCtr_IsExpired(&TMRInst,0)){
 		timerCount++;
 
-
-		updateEnemyPositions();
 		spawnEnemy();
+		updateEnemyPositions();
 		writePlayer(playerPos, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 
 
@@ -128,7 +122,7 @@ void TMR_Intr_Handler(void *data)
 	//	xil_printf("every 1 sec test--\r\n");
 	}
 
-	XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*8);
+	XTmrCtr_SetResetValue(&TMRInst,0, TMR_LOAD*10);
 	XTmrCtr_Start(&TMRInst,0);
 
 }	//end TMR_Intr_Handler
@@ -292,14 +286,11 @@ void HardwareInitialize()
 	return;
 }
 
-void prepareStartScreen(){
-	playerPos = COL3_COORD;
-	score = 0;
-	int i = 0;
-	for(;i< 15; i++){
-		enemyArray[i] = 0;
-	}
-	life = 4;
+
+void GameRun()
+{
+	char userInput = 0;
+
 	writeGameScreen(pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writePlayer(COL3_COORD, PLAYER_Y_COORD, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writeScore(0, SCORE_Y_COORD, score, pFrames[dispCtrl.curFrame], GAME_STRIDE);
@@ -308,14 +299,6 @@ void prepareStartScreen(){
 	writeLife(HEART_SIZE + 4, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writeLife(HEART_SIZE*2 +8, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
 	writeLife(HEART_SIZE*3 +12, 80, pFrames[dispCtrl.curFrame], GAME_STRIDE);
-}
-
-
-void GameRun()
-{
-	char userInput = 0;
-
-	prepareStartScreen();
 
 
 	while(1){
